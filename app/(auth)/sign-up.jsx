@@ -29,6 +29,7 @@ const SignUp = () => {
       setIsSubmitting(false);
     }
   };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
