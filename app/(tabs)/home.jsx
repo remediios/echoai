@@ -14,28 +14,24 @@ import EmptyState from '../../components/EmptyState';
 import { useEffect, useState } from 'react';
 import { getAllPosts } from '../../lib/appwrite';
 import useAppwrite from '../../lib/useAppwrite';
+import VideoCard from '../../components/VideoCard';
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const { data } = useAppwrite(getAllPosts);
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    //TODO: Recall posts/videos if any new videos appear
-
+    await refetch();
     setRefreshing(false);
   };
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={data}
+        data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <View>
-            <Text className="text-3xl text-white">{item.$id}</Text>
-          </View>
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
