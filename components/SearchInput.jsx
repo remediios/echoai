@@ -17,7 +17,6 @@ const SearchInput = ({ initialQuery }) => {
         placeholderTextColor="#CDCDE0"
         onChangeText={(e) => setQuery(e)}
       />
-
       <TouchableOpacity
         onPress={() => {
           if (query === '')
